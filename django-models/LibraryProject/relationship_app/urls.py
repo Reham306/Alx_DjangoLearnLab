@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import list_books, LibraryDetailView  # Import both views
+from .views import list_books, LibraryDetailView  # Import views from the current module
 
 urlpatterns = [
     path("books/", list_books, name="list_books"),  # Function-based view
