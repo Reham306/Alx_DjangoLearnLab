@@ -1,9 +1,18 @@
 from django.urls import path
-from .views import register, user_login, user_logout, list_books
+from django.contrib.auth.views import LoginView, LogoutView
+from . import views
 
 urlpatterns = [
-    path("register/", register, name="register"),
-    path("login/", user_login, name="login"),
-    path("logout/", user_logout, name="logout"),
-    path("books/", list_books, name="list_books"),
+    path("register/", views.register, name="register"),  # Use custom register view
+    path(
+        "login/",
+        LoginView.as_view(template_name="relationship_app/login.html"),
+        name="login",
+    ),  # Use Django's built-in LoginView with custom template
+    path(
+        "logout/",
+        LogoutView.as_view(template_name="relationship_app/logout.html"),
+        name="logout",
+    ),  # Use Django's built-in LogoutView with custom template
+    path("books/", views.list_books, name="list_books"),  # Function-based view for books
 ]
