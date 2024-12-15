@@ -1,6 +1,7 @@
-<h2>Edit Profile</h2>
-<form method="POST">
+<h2>Your Profile</h2>
+<form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save</button>
+    <label for="email">Email:</label>
+    <input type="email" name="email" value="{{ user.email }}">
+    <button type="submit">Update Profile</button>
 </form>

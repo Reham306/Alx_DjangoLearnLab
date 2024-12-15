@@ -1,10 +1,8 @@
-<h2>Blog Posts</h2>
+<h1>Blog Posts</h1>
 <ul>
-    {% for post in object_list %}
+    {% for post in posts %}
         <li>
-            <a href="{% url 'post-detail' post.pk %}">{{ post.title }}</a>
-            <p>{{ post.content|slice:":100" }}...</p>
+            <a href="{% url 'post-detail' post.pk %}">{{ post.title }}</a> - {{ post.published_date }}
         </li>
     {% endfor %}
 </ul>
-<a href="{% url 'post-create' %}">Create a new post</a>
