@@ -1,18 +1,16 @@
+# LibraryProject/bookshelf/forms.py
+
 from django import forms
-from .models import Book
 
-class BookSearchForm(forms.Form):
-    query = forms.CharField(required=False, label='Search Books')
+class ExampleForm(forms.Form):
+    # Example fields
+    name = forms.CharField(max_length=100)
+    email = forms.EmailField()
+    message = forms.CharField(widget=forms.Textarea)
 
-class BookForm(forms.ModelForm):
-    class Meta:
-        model = Book
-        fields = ['title', 'author', 'publication_year']
- 
-class ExampleForm(forms.ModelForm):
-    class Meta:
-        model = Book
-        fields = ['title', 'author', 'published_date']
-        widgets = {
-            'published_date': forms.DateInput(attrs={'type': 'date'}),
-        }
+    def clean_message(self):
+        # Custom validation
+        data = self.cleaned_data['message']
+        if len(data) < 10:
+            raise forms.ValidationError("Message is too short!")
+        return data
